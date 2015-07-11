@@ -1,6 +1,9 @@
 import re
 import json
 
+from zhidao.items import *
+from zhidao.misc.log import *
+
 from scrapy.selector import Selector
 try:
     from scrapy.spider import Spider
@@ -10,10 +13,6 @@ from scrapy.utils.response import get_base_url
 from scrapy.utils.url import urljoin_rfc
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor as sle
-
-from zhidao.items import *
-from zhidao.misc.log import *
-
 
 class ZhidaoSpider(CrawlSpider):
     name = "zhidao"
