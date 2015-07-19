@@ -12,5 +12,5 @@ class ZhidaoItem(Item):
     questionDetail = Field()
     answerDetail = Field()
     praiseNumber = Field()
-    answerTime = Field()
+    answerDate = Field()
     pass
