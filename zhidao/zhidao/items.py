@@ -7,10 +7,10 @@
 from scrapy.item import Item, Field
 
 class ZhidaoItem(Item):
-    name = Field()
-    catalog = Field()
-    workLocation = Field()
-    recruitNumber = Field()
-    detailLink = Field()
-    publishTime = Field()
+    addr = Field()
+    question = Field()
+    questionDetail = Field()
+    answerDetail = Field()
+    praiseNumber = Field()
+    answerTime = Field()
     pass

@@ -3,5 +3,6 @@
 ### TODO:
     1.多线程爬取网页数据
     2.将爬取的数据导入mysql
-
+	
+### Demo:
 ![image](https://github.com/Cuiyansong/Python_Spider/raw/master/zhidao/images/scrapy_framework.png)

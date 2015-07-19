@@ -16,43 +16,58 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor as sle
 
 class ZhidaoSpider(CrawlSpider):
     name = "zhidao"
-    allowed_domains = ["tencent.com"]
+    allowed_domains = ["baidu.com"]
     start_urls = [
-        "http://hr.tencent.com/position.php"
+        #"http://zhidao.baidu.com"
+        "http://zhidao.baidu.com/question/491451027.html"
     ]
     rules = [
-        Rule(sle(allow=("/position.php\?&start=\d{,4}#a")), follow=True, callback='parse_item')
+        #Rule(sle(allow=("/question/^\d$.html\?fr=iks&word=^\w+$&ie=gbk")), follow=True, callback='parse_item')
+        #Rule(sle(allow=("/question/\d+\.html")), follow=True, callback='parse_item')
+        #http://zhidao.baidu.com/question/491451027.html
+        Rule(sle(allow=("/question/491451027.html")), callback='parse_item')
     ]
 
     def parse_item(self, response):
         items = []
         sel = Selector(response)
         base_url = get_base_url(response)
-        sites_even = sel.css('table.tablelist tr.even')
-        for site in sites_even:
-            item = ZhidaoItem()
-            item['name'] = site.css('.l.square a').xpath('text()').extract()[0]
-            relative_url = site.css('.l.square a').xpath('@href').extract()[0]
-            item['detailLink'] = urljoin_rfc(base_url, relative_url)
-            item['catalog'] = site.css('tr > td:nth-child(2)::text').extract()[0]
-            item['workLocation'] = site.css('tr > td:nth-child(4)::text').extract()[0]
-            item['recruitNumber'] = site.css('tr > td:nth-child(3)::text').extract()[0]
-            item['publishTime'] = site.css('tr > td:nth-child(5)::text').extract()[0]
-            items.append(item)
-            #print repr(item).decode("unicode-escape") + '\n'
 
-        sites_odd = sel.css('table.tablelist tr.odd')
-        for site in sites_odd:
-            item = ZhidaoItem()
-            item['name'] = site.css('.l.square a').xpath('text()').extract()[0]
-            relative_url = site.css('.l.square a').xpath('@href').extract()[0]
-            item['detailLink'] = urljoin_rfc(base_url, relative_url)
-            item['catalog'] = site.css('tr > td:nth-child(2)::text').extract()[0]
-            item['workLocation'] = site.css('tr > td:nth-child(4)::text').extract()[0]
-            item['recruitNumber'] = site.css('tr > td:nth-child(3)::text').extract()[0]
-            item['publishTime'] = site.css('tr > td:nth-child(5)::text').extract()[0]
-            items.append(item)
-            #print repr(item).decode("unicode-escape") + '\n'
+        item = ZhidaoItem()
+        item['addr'] = base_url
+        item['question'] = sel.css('#wgt-ask > h1 > span::text').extract()
+        item['questionDetail'] = sel.css('#wgt-ask > pre:not(#selectsearch-icon)::text').extract()
+        item['answerDetail'] = sel.css('.line .content > pre::text').extract()
+        item['praiseNumber'] = sel.css('#wgt-ask > h1 > span').extract()
+        item['answerTime'] = sel.css('span.grid-r.f-aid.pos-time.mt-15:nth-child(1)::text').extract()
+        items.append(item)
+
+        #sites = sel.css('ask-title')
+        #sites_even = sel.css('table.tablelist tr.even')
+        # for site in sites_even:
+        #     item = ZhidaoItem()
+        #     item['name'] = site.css('.l.square a').xpath('text()').extract()[0]
+        #     relative_url = site.css('.l.square a').xpath('@href').extract()[0]
+        #     item['detailLink'] = urljoin_rfc(base_url, relative_url)
+        #     item['catalog'] = site.css('tr > td:nth-child(2)::text').extract()[0]
+        #     item['workLocation'] = site.css('tr > td:nth-child(4)::text').extract()[0]
+        #     item['recruitNumber'] = site.css('tr > td:nth-child(3)::text').extract()[0]
+        #     item['publishTime'] = site.css('tr > td:nth-child(5)::text').extract()[0]
+        #     items.append(item)
+        #     #print repr(item).decode("unicode-escape") + '\n'
+        #
+        # sites_odd = sel.css('table.tablelist tr.odd')
+        # for site in sites_odd:
+        #     item = ZhidaoItem()
+        #     item['name'] = site.css('.l.square a').xpath('text()').extract()[0]
+        #     relative_url = site.css('.l.square a').xpath('@href').extract()[0]
+        #     item['detailLink'] = urljoin_rfc(base_url, relative_url)
+        #     item['catalog'] = site.css('tr > td:nth-child(2)::text').extract()[0]
+        #     item['workLocation'] = site.css('tr > td:nth-child(4)::text').extract()[0]
+        #     item['recruitNumber'] = site.css('tr > td:nth-child(3)::text').extract()[0]
+        #     item['publishTime'] = site.css('tr > td:nth-child(5)::text').extract()[0]
+        #     items.append(item)
+        #     #print repr(item).decode("unicode-escape") + '\n'
 
         info('parsed ' + str(response))
         return items
