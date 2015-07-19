@@ -1,8 +1,8 @@
 # This is a homework trying to crawl 'baidu.zhidao' answers.
 
-### Install Guide
+### Install Guide:
 The quick way: 
-	<p>> `pip install scrapy'
+	<p>> `pip install scrapy`
 
 For more details see the install section in the documentation: <http://doc.scrapy.org/en/latest/intro/install.html>
 

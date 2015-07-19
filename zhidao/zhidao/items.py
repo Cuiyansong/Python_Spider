@@ -7,7 +7,7 @@
 from scrapy.item import Item, Field
 
 class ZhidaoItem(Item):
-    addr = Field()
+    address = Field()
     question = Field()
     questionDetail = Field()
     answerDetail = Field()
