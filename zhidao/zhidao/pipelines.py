@@ -7,7 +7,7 @@
 import json
 import codecs
 
-class JsonWithEncodingTencentPipeline(object):
+class JsonWithZhidaoPipeline(object):
 
     def __init__(self):
         self.file = codecs.open('Answers.json', 'w', encoding='utf-8')

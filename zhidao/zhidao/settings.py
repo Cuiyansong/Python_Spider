@@ -62,7 +62,7 @@ DOWNLOAD_DELAY=1
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'zhidao.pipelines.JsonWithEncodingTencentPipeline': 300,
+   'zhidao.pipelines.JsonWithZhidaoPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -43,7 +43,9 @@ class ZhidaoSpider(CrawlSpider):
         info('DEBUG--> ' + str(item['praiseNumber']))
         info('parsed ' + str(response))
         return items
-
+   
+    def close_spider(self):
+        self.close(CrawlSpider,"Manual Stop...")
 
     def _process_request(self, request):
         info('process ' + str(request))
