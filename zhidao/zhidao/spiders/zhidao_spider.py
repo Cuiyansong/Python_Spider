@@ -38,7 +38,7 @@ class ZhidaoSpider(CrawlSpider):
         item['question'] = sel.css('#wgt-ask > h1 > span::text').extract()
         item['questionDetail'] = sel.css('#wgt-ask > pre:not(#selectsearch-icon)::text').extract()
         item['answerDetail'] = sel.css('.line .content > pre::text').extract()
-        item['praiseNumber'] = sel.css('#wgt-ask > h1 > span').extract()
+        # item['praiseNumber'] = sel.css('#wgt-ask > h1 > span').extract()
         item['answerDate'] = sel.css('span.grid-r.f-aid.pos-time.mt-15:nth-child(1)::text').extract()
         items.append(item)
 

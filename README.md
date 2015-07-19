@@ -1,10 +1,10 @@
 # This is a homework trying to crawl 'baidu.zhidao' answers.
 
-
+### Install Guide
 
 
 ### TODOs:
-	Please visit: <https://github.com/Cuiyansong/Python_Spider/issues>
+	Please visit: [issues](https://github.com/Cuiyansong/Python_Spider/issues)
 	
 	
 ### Demo:
