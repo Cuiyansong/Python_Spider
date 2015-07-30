@@ -24,7 +24,7 @@ class ZhidaoSpider(CrawlSpider):
         ########   "http://zhidao.baidu.com/question/491451027.html"
     ]
     rules = [
-        Rule(sle(allow=(r'/question/\d+\.html')), follow=True, callback='parse_item')
+        Rule(sle(allow=(r'/question/')), follow=True, callback='parse_item')
     ]
 
     def parse_item(self, response):
@@ -47,7 +47,8 @@ class ZhidaoSpider(CrawlSpider):
         else:
             item['answerDate'] = sel.css('span.grid-r.f-aid.pos-time::text').extract_first(default=dt_default)
 
-        items.append(item)
+        if(len(item['question']) != 0):
+            items.append(item)
         info('parsed ' + str(response))
         return items
 
